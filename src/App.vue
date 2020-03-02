@@ -5,10 +5,12 @@
       <input type="date" name="start-date" value="start-date">
       <p>This date will return the selected date and the 7 days after.</p>
     </div>
-
+    <hr>
     <label>Element Counter:</label>
     <asteroid-item :asteroid="asteroids"/>
+    <hr>
     <asteroid-container :asteroids="asteroids"/>
+    <hr>
     <asteroid-detail :asteroid="asteroids"/>
   </div>
 </template>
@@ -17,6 +19,9 @@
 import asteroidItem from './components/item.vue';
 import asteroidContainer from './components/container.vue';
 import asteroidDetail from './components/detail.vue';
+import {eventBus} from './main.js';
+
+
 export default {
   name: 'app',
   data(){
@@ -24,7 +29,8 @@ export default {
       start_date: '2020-02-17',
       end_date: '2020-02-21',
       dynamic_url: '',
-      asteroids: []
+      asteroids: [],
+      selected_asteroid: null
     }
   },
   computed:{
@@ -37,6 +43,9 @@ export default {
     .then(result => result.json())
     .then(payload => this.asteroids = payload)
 
+    eventBus.$on("asteroid-selected", (asteroid) => {
+      this.selected_asteroid = asteroid;
+    })
   },
   components: {
     'asteroid-item': asteroidItem,
@@ -54,5 +63,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+hr {
+  width: 70%;
 }
 </style>

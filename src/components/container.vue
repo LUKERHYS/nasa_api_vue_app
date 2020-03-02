@@ -3,9 +3,8 @@
     <option v-for="(asteroid, index) in asteroids" value="index">{{asteroids["near_earth_objects"]["2020-02-17"][0]["id"]}}</option>
   </select> -->
   <div>
-  <ul class="cicrle">
-    {{asteroid["near_earth_objects"]["2020-02-17"][0]["name"]}}
-    <li v-for="(asteroid, index) in asteroids"></li>
+  <ul>
+    <li v-for="(asteroid, index) in asteroids">{{asteroid["near_earth_objects"]["2020-02-20"]}}</li>
   </ul>
 </div>
 
@@ -14,12 +13,13 @@
 <script>
 export default {
   name: 'asteroid-container',
-  props: ['asteroids'],
+  props: ['asteroids', 'date'],
   circleWidth: "50px",
   asteriod_diameter: 0,
-  computed: {
+  methods: {
     dynamic_circle: function(){
       asteriod_diameter = this.asteroids["near_earth_objects"]["2020-02-17"][0]["estimated_diameter"]["meters"]["estimated_diameter_max"];
+      return this.asteroid_diameter;
     }
   }
 }
@@ -28,8 +28,8 @@ export default {
 <style lang="css" scoped>
 li{
   border-radius: 50%;
-  width: this.asteriod_diameter px;
-  height: this.asteriod_diameter px;
+  width: dynamic_circle();
+  height: 50px;
   background-color: #ededed;
   list-style: none;
 }

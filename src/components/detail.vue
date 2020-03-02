@@ -50,7 +50,10 @@ div {
   justify-content: space-between;
 }
 td {
-  
+  width: 60em;
+}
+table {
+  margin-top: 10%;
 }
 
 </style>
